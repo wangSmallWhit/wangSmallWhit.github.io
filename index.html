@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>LAYOUT 工程师 · 科技视觉</title>
+  <!-- 引入 Google Font 提升科技感 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:opsz,wght@14..32,400;14..32,500;14..32,700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 图标库 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: radial-gradient(circle at 20% 10%, #0a0f1e, #03050a);
+      font-family: 'Inter', sans-serif;
+      color: #e0f0ff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 1.5rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* 动态网格背景 - 科技感纹理 */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* 流动光晕效果 */
+    body::after {
+      content: "";
+      position: fixed;
+      top: -20%;
+      left: -20%;
+      width: 140%;
+      height: 140%;
+      background: radial-gradient(circle at 70% 30%, rgba(0, 180, 255, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+      animation: slowPulse 12s infinite alternate ease-in-out;
+    }
+
+    @keyframes slowPulse {
+      0% { opacity: 0.5; transform: scale(1); }
+      100% { opacity: 0.9; transform: scale(1.05); }
+    }
+
+    .main-container {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      width: 100%;
+      backdrop-filter: blur(12px);
+      background: rgba(8, 15, 28, 0.65);
+      border: 1px solid rgba(0, 255, 255, 0.15);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 180, 255, 0.2);
+      border-radius: 2.5rem;
+      padding: 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      transition: all 0.3s ease;
+    }
+
+    /* 头部区域 */
+    .header-section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+      padding-bottom: 2rem;
+      gap: 1.5rem;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .hex-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #00e5ff, #0066ff);
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #03050a;
+      font-size: 2rem;
+      font-weight: bold;
+      box-shadow: 0 0 25px #00b4ff;
+      transition: 0.3s;
+    }
+
+    .hex-icon:hover {
+      box-shadow: 0 0 40px #00ffff, 0 0 80px #0066ff;
+      transform: rotate(5deg);
+    }
+
+    .title-block h1 {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 2.6rem;
+      letter-spacing: 2px;
+      background: linear-gradient(to right, #a0f0ff, #4da8ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 15px rgba(0,160,255,0.5);
+      margin-bottom: 0.2rem;
+    }
+
+    .subtitle {
+      font-weight: 500;
+      color: #7f9fbf;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+    }
+
+    .subtitle i {
+      color: #00e0ff;
+      font-size: 0.9rem;
+    }
+
+    .badge {
+      background: rgba(0, 200, 255, 0.15);
+      border: 1px solid #00b4ff;
+      color: #b3f0ff;
+      padding: 0.3rem 1.2rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      backdrop-filter: blur(4px);
+    }
+
+    .profile-avatar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .avatar-circle {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #0a1a2f, #021024);
+      border: 2px solid #00ccff;
+      box-shadow: 0 0 30px #0066ff80;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: #00eaff;
+      transition: 0.3s;
+    }
+
+    .avatar-circle:hover {
+      border-color: #ffffff;
+      box-shadow: 0 0 45px #00a6ff;
+    }
+
+    /* 核心介绍卡片 */
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    @media (max-width: 750px) {
+      .intro-grid {
+        grid-template-columns: 1fr;
+      }
+      .main-container {
+        padding: 2rem 1.5rem;
+      }
+    }
+
+    .lead-text {
+      font-size: 1.8rem;
+      font-weight: 600;
+      line-height: 1.4;
+      color: #ffffff;
+      text-shadow: 0 0 10px #003366;
+    }
+
+    .highlight {
+      background: linear-gradient(120deg, #00f2fe, #4facfe);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+    }
+
+    .description {
+      color: #b0c7e0;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin: 1rem 0 1.5rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 1.2rem;
+    }
+
+    .skill-tag {
+      background: rgba(18, 30, 50, 0.7);
+      border: 1px solid #2f80ed;
+      padding: 0.4rem 1.2rem;
+      border-radius: 2rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #aad4ff;
+      backdrop-filter: blur(5px);
+      transition: 0.25s;
+      letter-spacing: 0.5px;
+    }
+
+    .skill-tag i {
+      margin-right: 6px;
+      color: #00dcff;
+    }
+
+    .skill-tag:hover {
+      background: #00a6ff20;
+      border-color: #00ffff;
+      box-shadow: 0 0 20px #0066ff;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* 右侧统计卡片 */
+    .stats-panel {
+      background: rgba(0, 20, 40, 0.55);
+      backdrop-filter: blur(16px);
+      border-radius: 2rem;
+      padding: 1.8rem;
+      border: 1px solid rgba(0, 255, 200, 0.25);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.6), inset 0 0 20px rgba(0,180,255,0.2);
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px dashed rgba(0, 255, 255, 0.25);
+      padding-bottom: 0.7rem;
+    }
+
+    .stat-label {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: #90b8ff;
+      font-weight: 500;
+    }
+
+    .stat-value {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1.4rem;
+      color: #00f2ff;
+      text-shadow: 0 0 8px #006eff;
+    }
+
+    .glow-bar {
+      height: 6px;
+      background: #0a1a2f;
+      border-radius: 10px;
+      margin-top: 0.3rem;
+      overflow: hidden;
+    }
+
+    .glow-fill {
+      width: 85%;
+      height: 100%;
+      background: linear-gradient(90deg, #00c8ff, #0066ff);
+      box-shadow: 0 0 20px #0099ff;
+      border-radius: 10px;
+    }
+
+    .glow-fill.alt {
+      width: 92%;
+      background: linear-gradient(90deg, #00e676, #0091ea);
+    }
+
+    /* 底部联系与项目 */
+    .footer-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1rem;
+      gap: 1.5rem;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 1.8rem;
+    }
+
+    .contact-links a {
+      color: #9dcbff;
+      font-size: 1.8rem;
+      transition: 0.3s;
+      text-decoration: none;
+    }
+
+    .contact-links a:hover {
+      color: #00ffff;
+      filter: drop-shadow(0 0 12px #00a6ff);
+      transform: scale(1.15);
+    }
+
+    .btn-primary {
+      background: transparent;
+      border: 1.5px solid #00ccff;
+      color: #00e5ff;
+      padding: 0.8rem 2.2rem;
+      border-radius: 3rem;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      backdrop-filter: blur(10px);
+      background: rgba(0, 30, 60, 0.4);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    .btn-primary:hover {
+      background: #00ccff;
+      color: #020c18;
+      box-shadow: 0 0 35px #00a3ff;
+      border-color: #ffffff;
+    }
+
+    .cursor-glow {
+      position: relative;
+    }
+
+    /* 响应式调整 */
+    @media (max-width: 550px) {
+      .header-section {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .lead-text {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="main-container">
+    
+    <!-- 头部：身份标识 -->
+    <div class="header-section">
+      <div class="logo-area">
+        <div class="hex-icon">
+          <i class="fas fa-microchip"></i>
+        </div>
+        <div class="title-block">
+          <h1>LAYOUT·Z</h1>
+          <div class="subtitle">
+            <i class="fas fa-route"></i> 高级布局工程师
+            <span class="badge">AVAILABLE</span>
+          </div>
+        </div>
+      </div>
+      <div class="profile-avatar">
+        <div class="avatar-circle">
+          <i class="fas fa-user-astronaut"></i>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.2rem;">
+          <span style="font-weight: 700; color: white;">ALEX CHEN</span>
+          <span style="font-size: 0.8rem; color: #5bc0ff;">PCB · IC 版图</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 主要内容网格 -->
+    <div class="intro-grid">
+      <div>
+        <div class="lead-text">
+          将<span class="highlight">电路逻辑</span><br>转化为<span class="highlight">物理艺术</span>
+        </div>
+        <p class="description">
+          专注于高性能PCB布局与IC版图设计。从信号完整性到电源完整性，
+          用精密走线与元件排布构建可靠电子系统。十年匠心，让每一块电路板都成为科技与美学的交汇。
+        </p>
+        <div class="skill-tags">
+          <span class="skill-tag"><i class="fas fa-bolt"></i> 高速数字</span>
+          <span class="skill-tag"><i class="fas fa-wave-square"></i> 射频布局</span>
+          <span class="skill-tag"><i class="fas fa-microchip"></i> Cadence Allegro</span>
+          <span class="skill-tag"><i class="fas fa-drafting-compass"></i> Altium Designer</span>
+          <span class="skill-tag"><i class="fas fa-magnet"></i> 信号完整性</span>
+          <span class="skill-tag"><i class="fas fa-layer-group"></i> 多层板</span>
+        </div>
+      </div>
+      
+      <!-- 右侧数据面板 -->
+      <div class="stats-panel">
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+          <i class="fas fa-chart-bar" style="color: #00e0ff;"></i>
+          <span style="font-weight: 600; letter-spacing: 1px;">布局性能指标</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label"><i class="fas fa-check-circle"></i> 设计项目</span>
+          <span class="stat-value">120+</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label"><i class="fas fa-layer-group"></i> 最高层数</span>
+          <span class="stat-value">26L</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label"><i class="fas fa-tachometer-alt"></i> 高速接口</span>
+          <span class="stat-value">PCIe 5.0</span>
+        </div>
+        <div>
+          <span class="stat-label" style="margin-bottom: 0.4rem; display: block;"><i class="fas fa-bolt"></i> 布局密度优化</span>
+          <div class="glow-bar"><div class="glow-fill"></div></div>
+          <span style="font-size: 0.8rem; color: #7faeff; float: right; margin-top: 2px;">85% 效率</span>
+        </div>
+        <div style="margin-top: 0.4rem;">
+          <span class="stat-label" style="margin-bottom: 0.4rem; display: block;"><i class="fas fa-wifi"></i> 信号完整性</span>
+          <div class="glow-bar"><div class="glow-fill alt"></div></div>
+          <span style="font-size: 0.8rem; color: #7faeff; float: right; margin-top: 2px;">92% 通过率</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 底部行动区 -->
+    <div class="footer-actions">
+      <div class="contact-links">
+        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" aria-label="邮箱"><i class="fas fa-envelope"></i></a>
+        <a href="#" aria-label="微信"><i class="fab fa-weixin"></i></a>
+      </div>
+      <div style="display: flex; gap: 1rem;">
+        <a href="#" class="btn-primary"><i class="fas fa-file-pdf"></i> 布局作品集</a>
+        <a href="#" class="btn-primary"><i class="fas fa-paper-plane"></i> 联系合作</a>
+      </div>
+    </div>
+    
+    <!-- 装饰性角落文字 -->
+    <div style="text-align: right; font-size: 0.7rem; color: #2f5580; margin-top: 0.5rem; letter-spacing: 2px;">
+      <i class="far fa-clock"></i> 实时状态 · 开放项目咨询
+    </div>
+  </div>
+</body>
+</html>
