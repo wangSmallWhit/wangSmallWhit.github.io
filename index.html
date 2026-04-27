@@ -334,7 +334,7 @@
             padding: 0.9rem 0;
             border-bottom: 1px solid #f1f5f9;
             transition: all 0.2s ease;
-            cursor: default;
+            cursor: pointer;
         }
 
         .project-item:last-child {
@@ -767,8 +767,8 @@
                     持续学习高速数字设计。
                 </p>
                 <div class="board-experience">
-                    <div class="board-chip"><i class="fas fa-broadcast-tower"></i> 射频收发板</div>
-                    <div class="board-chip"><i class="fas fa-memory"></i> DDR4 接口板</div>
+                    <div class="board-chip"><i class="fas fa-car"></i> 车载射频通信</div>
+                    <div class="board-chip"><i class="fas fa-industry"></i> 工业数据采集</div>
                     <div class="board-chip"><i class="fas fa-wave-square"></i> 射频功放板</div>
                 </div>
                 <div class="counter-row">
@@ -792,29 +792,32 @@
                 <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.2rem; font-weight: 600; color: #0f172a;">
                     <i class="fas fa-cube" style="color: #6366f1;"></i> 近期项目
                 </div>
-                <div class="project-item">
+                <!-- 项目1：车载信息娱乐系统射频通信模块设计 -->
+                <div class="project-item" data-project="automotive">
                     <div>
-                        <div class="project-name"><i class="fas fa-broadcast-tower" style="font-size:0.8rem;"></i> 2.4GHz 射频前端</div>
-                        <div class="project-desc">4层板 · 阻抗控制</div>
+                        <div class="project-name"><i class="fas fa-car" style="font-size:0.85rem;"></i> 车载信息娱乐系统射频通信模块设计</div>
+                        <div class="project-desc">10层板 · 多模射频集成</div>
                     </div>
-                    <span class="tech-tag">RF</span>
+                    <span class="tech-tag">汽车电子</span>
                 </div>
-                <div class="project-item">
+                <!-- 项目2：工业级高速数据采集卡设计 -->
+                <div class="project-item" data-project="industrial">
                     <div>
-                        <div class="project-name"><i class="fas fa-memory"></i> DDR4 控制器板</div>
-                        <div class="project-desc">6层板 · 等长布线</div>
+                        <div class="project-name"><i class="fas fa-industry" style="font-size:0.85rem;"></i> 工业级高速数据采集卡设计</div>
+                        <div class="project-desc">10层板 · 千兆以太网</div>
                     </div>
-                    <span class="tech-tag">DDR</span>
+                    <span class="tech-tag">工业控制</span>
                 </div>
-                <div class="project-item">
+                <!-- 项目3保持不变 -->
+                <div class="project-item" data-project="rfpa">
                     <div>
-                        <div class="project-name"><i class="fas fa-wave-square"></i> 射频功率放大器</div>
+                        <div class="project-name"><i class="fas fa-wave-square" style="font-size:0.85rem;"></i> 射频功率放大器</div>
                         <div class="project-desc">2层板 · 热管理</div>
                     </div>
                     <span class="tech-tag">PA</span>
                 </div>
                 <div class="view-more">
-                    <i class="fas fa-arrow-right"></i> 查看完整版图
+                    <i class="fas fa-arrow-right"></i> 点击项目查看详情
                 </div>
             </div>
         </div>
@@ -874,13 +877,223 @@
 
     <script>
         (function() {
+            // 项目详情数据
+            const projectDetails = {
+                automotive: {
+                    title: '车载信息娱乐系统射频通信模块设计',
+                    subtitle: '10层板 · 汽车电子 · 多模射频集成',
+                    icon: 'fa-car',
+                    description: '该板卡采用10层板叠层设计，核心模块包括4G/5G双模射频模块、GPS/北斗定位模块、蓝牙/WiFi无线通讯模块、CAN总线通信模块、电源管理模块等。设计时严格分区处理，各射频模块间设置金属屏蔽腔，并在射频信号附近覆铜打地孔墙，电源部分输入输出端设置多级滤波。',
+                    technologies: [
+                        { name: '4G/5G 双模射频', icon: 'fa-broadcast-tower' },
+                        { name: 'GPS/北斗定位', icon: 'fa-satellite' },
+                        { name: '蓝牙/WiFi 无线', icon: 'fa-wifi' },
+                        { name: 'CAN总线通信', icon: 'fa-network-wired' },
+                        { name: '电源管理模块', icon: 'fa-bolt' },
+                        { name: '金属屏蔽腔设计', icon: 'fa-shield-alt' },
+                        { name: '地孔墙隔离', icon: 'fa-border-all' },
+                        { name: '多级滤波电路', icon: 'fa-filter' },
+                        { name: '10层板叠层', icon: 'fa-layer-group' },
+                    ]
+                },
+                industrial: {
+                    title: '工业级高速数据采集卡设计',
+                    subtitle: '10层板 · 工业控制 · 千兆以太网 · ADC',
+                    icon: 'fa-industry',
+                    description: '采用10层板叠层设计。千兆以太网信号走内层，ADC模块单独规划模拟地平面，与数字区域用磁珠以单点接地的方式连接。电源输入端增加浪涌保护电路，滤波电容靠近pin脚放置。高速部分分区处理，布线时分组，数据线组等长要求±5mils，地址线等长要求±25mils，差分组内等长±5mils。',
+                    technologies: [
+                        { name: '千兆以太网', icon: 'fa-ethernet' },
+                        { name: 'ADC模块', icon: 'fa-microchip' },
+                        { name: '模拟地平面', icon: 'fa-layer-group' },
+                        { name: '磁珠单点接地', icon: 'fa-magnet' },
+                        { name: '浪涌保护电路', icon: 'fa-shield-alt' },
+                        { name: '等长布线', icon: 'fa-ruler-combined' },
+                        { name: '差分布线', icon: 'fa-exchange-alt' },
+                        { name: '10层板叠层', icon: 'fa-layer-group' },
+                        { name: '高速分组布线', icon: 'fa-project-diagram' },
+                    ]
+                },
+                rfpa: {
+                    title: '射频功率放大器',
+                    subtitle: '2层板 · 热管理 · 射频功放',
+                    icon: 'fa-wave-square',
+                    description: '射频功率放大器设计，采用2层板结构，重点处理热管理方案。',
+                    technologies: [
+                        { name: '射频功放', icon: 'fa-wave-square' },
+                        { name: '热管理', icon: 'fa-thermometer-half' },
+                        { name: '2层板', icon: 'fa-layer-group' },
+                    ]
+                }
+            };
+
+            // 为所有项目项添加点击事件
+            const projectItems = document.querySelectorAll('.project-item');
+            projectItems.forEach(function(item) {
+                item.addEventListener('click', function(e) {
+                    const projectKey = this.getAttribute('data-project');
+                    if (projectKey && projectDetails[projectKey]) {
+                        openProjectDetail(projectDetails[projectKey]);
+                    }
+                });
+                // 添加手型光标
+                item.style.cursor = 'pointer';
+            });
+
+            // 打开项目详情新窗口
+            function openProjectDetail(detail) {
+                // 构建技术标签HTML
+                let techTagsHTML = '';
+                detail.technologies.forEach(function(tech) {
+                    techTagsHTML += `
+                        <span style="
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 0.4rem;
+                            background: #f1f5f9;
+                            border: 1px solid #e2e8f0;
+                            border-radius: 2rem;
+                            padding: 0.4rem 1rem;
+                            font-size: 0.85rem;
+                            font-weight: 500;
+                            color: #334155;
+                            margin: 0.3rem;
+                            transition: all 0.2s;
+                        ">
+                            <i class="fas ${tech.icon}" style="color: #6366f1; font-size: 0.8rem;"></i> ${tech.name}
+                        </span>
+                    `;
+                });
+
+                // 构建完整HTML
+                const detailHTML = `
+                    <!DOCTYPE html>
+                    <html lang="zh-CN">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>${detail.title} · Mr.Wang</title>
+                        <link rel="preconnect" href="https://fonts.googleapis.com">
+                        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                        <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+                        <style>
+                            * { margin: 0; padding: 0; box-sizing: border-box; }
+                            body {
+                                font-family: 'Inter', sans-serif;
+                                background: #f8fafc;
+                                min-height: 100vh;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                padding: 2rem;
+                                background-image: 
+                                    radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.03) 0%, transparent 35%),
+                                    radial-gradient(circle at 90% 75%, rgba(99, 102, 241, 0.04) 0%, transparent 40%);
+                            }
+                            .detail-card {
+                                max-width: 800px;
+                                width: 100%;
+                                background: white;
+                                border-radius: 2rem;
+                                padding: 2.5rem 2.5rem 2rem;
+                                box-shadow: 0 20px 40px -12px rgba(0,0,0,0.08);
+                                border: 1px solid #f1f5f9;
+                            }
+                            .back-btn {
+                                display: inline-flex;
+                                align-items: center;
+                                gap: 0.4rem;
+                                color: #6366f1;
+                                text-decoration: none;
+                                font-weight: 500;
+                                font-size: 0.9rem;
+                                margin-bottom: 1.5rem;
+                                transition: gap 0.2s;
+                            }
+                            .back-btn:hover { gap: 0.7rem; }
+                            .project-icon {
+                                font-size: 2.5rem;
+                                color: #6366f1;
+                                margin-bottom: 0.5rem;
+                            }
+                            .detail-title {
+                                font-family: 'Space Grotesk', sans-serif;
+                                font-size: 1.8rem;
+                                font-weight: 600;
+                                color: #0f172a;
+                                margin-bottom: 0.3rem;
+                            }
+                            .detail-subtitle {
+                                color: #64748b;
+                                font-size: 0.95rem;
+                                margin-bottom: 1.5rem;
+                                font-weight: 500;
+                            }
+                            .section-title {
+                                font-weight: 600;
+                                color: #0f172a;
+                                font-size: 1rem;
+                                margin-bottom: 0.6rem;
+                                display: flex;
+                                align-items: center;
+                                gap: 0.4rem;
+                            }
+                            .description {
+                                color: #475569;
+                                line-height: 1.8;
+                                font-size: 0.95rem;
+                                margin-bottom: 1.8rem;
+                                background: #f8fafc;
+                                padding: 1.2rem 1.5rem;
+                                border-radius: 1rem;
+                                border-left: 3px solid #6366f1;
+                            }
+                            .tech-grid {
+                                display: flex;
+                                flex-wrap: wrap;
+                                margin-bottom: 1.5rem;
+                            }
+                            .footer-note {
+                                text-align: right;
+                                color: #94a3b8;
+                                font-size: 0.75rem;
+                                margin-top: 1.5rem;
+                                border-top: 1px solid #f1f5f9;
+                                padding-top: 1rem;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="detail-card">
+                            <a href="javascript:window.close()" class="back-btn"><i class="fas fa-arrow-left"></i> 返回主页</a>
+                            <div class="project-icon"><i class="fas ${detail.icon}"></i></div>
+                            <h2 class="detail-title">${detail.title}</h2>
+                            <p class="detail-subtitle">${detail.subtitle}</p>
+                            <div class="section-title"><i class="fas fa-align-left" style="color:#6366f1;"></i> 项目描述</div>
+                            <div class="description">${detail.description}</div>
+                            <div class="section-title"><i class="fas fa-microchip" style="color:#6366f1;"></i> 相关技术</div>
+                            <div class="tech-grid">${techTagsHTML}</div>
+                            <div class="footer-note">Mr.Wang · PCB LAYOUT 工程师 · 项目详情</div>
+                        </div>
+                    </body>
+                    </html>
+                `;
+
+                // 打开新窗口
+                const newWindow = window.open('', '_blank');
+                if (newWindow) {
+                    newWindow.document.write(detailHTML);
+                    newWindow.document.close();
+                }
+            }
+
+            // ===== 复制功能 =====
             // 复制功能 - 邮箱
             const emailValue = document.querySelector('.email-value');
             if (emailValue) {
                 emailValue.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    const text = this.innerText;
-                    copyToClipboard(text, this);
+                    copyToClipboard(this.innerText, this);
                 });
             }
 
@@ -889,8 +1102,7 @@
             if (wechatValue) {
                 wechatValue.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    const text = this.innerText;
-                    copyToClipboard(text, this);
+                    copyToClipboard(this.innerText, this);
                 });
             }
 
@@ -899,14 +1111,12 @@
             if (phoneValue) {
                 phoneValue.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    const text = this.innerText;
-                    copyToClipboard(text, this);
+                    copyToClipboard(this.innerText, this);
                 });
             }
 
             function copyToClipboard(text, element) {
                 navigator.clipboard.writeText(text).then(function() {
-                    // 视觉反馈
                     const originalColor = element.style.color;
                     element.style.color = '#6366f1';
                     element.style.transition = 'color 0.15s';
@@ -914,7 +1124,6 @@
                         element.style.color = originalColor;
                     }, 400);
 
-                    // 更新复制提示
                     const parent = element.closest('.tooltip-popup') || element.closest('.contact-tooltip-item');
                     if (parent) {
                         const hint = parent.querySelector('.tooltip-copy-hint') || parent.querySelector('.contact-tooltip-copy');
